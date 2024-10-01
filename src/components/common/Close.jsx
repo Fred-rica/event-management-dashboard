@@ -1,5 +1,5 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
 
 const Close = ({ onClose }) => {
   return (
@@ -12,4 +12,4 @@ const Close = ({ onClose }) => {
   );
 };
 
-export default Close
+export default Close;

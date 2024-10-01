@@ -1,5 +1,5 @@
-'use client'
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -23,14 +23,43 @@ ChartJS.register(
 );
 
 const EventBarChart = () => {
+  const [labels, setLabels] = useState([]); // State for labels
+
+  // Function to determine if the screen is small
+  const isSmallScreen = () => window.innerWidth < 600;
+
+  // Function to get labels based on screen size
+  const getLabels = () => {
+    const monthNames = Object.keys(eventData);
+    return isSmallScreen()
+      ? monthNames.map((month) => month.slice(0, 2)) // First two letters for small screens
+      : monthNames; // Full names for larger screens
+  };
+
+  useEffect(() => {
+    // Set initial labels
+    setLabels(getLabels());
+
+    // Update labels on resize
+    const handleResize = () => {
+      setLabels(getLabels());
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const data = {
-    labels: Object.keys(eventData), 
+    labels: labels,
     datasets: [
       {
-        data: Object.values(eventData), 
-        backgroundColor: "#8576FF", 
-        barThickness: 25.66,
-        borderRadius: 1
+        data: Object.values(eventData),
+        backgroundColor: "#8576FF",
+        borderRadius: 1,
       },
     ],
   };
@@ -48,14 +77,14 @@ const EventBarChart = () => {
       y: {
         beginAtZero: true,
         ticks: {
-          stepSize: 200, // Display labels in increments of 200
-          padding: 15, // Add more space between y-axis labels and the chart
+          stepSize: 200,
+          padding: 15,
         },
         grid: {
-          drawBorder: false, // Do not draw border around the chart
-          drawOnChartArea: true, // Draw gridlines on the chart area
-          drawTicks: false, // Optional: Remove small ticks at the edges
-          color: "rgba(200, 200, 200, 0.5)", // Color of the gridlines
+          drawBorder: false,
+          drawOnChartArea: true,
+          drawTicks: false,
+          color: "rgba(200, 200, 200, 0.5)",
           lineWidth: 1.5,
         },
         border: {
@@ -65,7 +94,7 @@ const EventBarChart = () => {
       },
       x: {
         ticks: {
-          padding: 15, // Add more space between x-axis labels and the chart
+          padding: 15,
         },
         grid: {
           display: true,
@@ -87,7 +116,7 @@ const EventBarChart = () => {
 
   return (
     <section className="w-full lg:w-1/2 border border-[#F2F2F7]">
-      <div className="w-full h-[400px] lg:h-full p-0 lg:p-5 rounded-sm">
+      <div className="w-full h-[260px] lg:h-full p-0 lg:p-5 rounded-sm">
         <Bar data={data} options={options} />
       </div>
     </section>

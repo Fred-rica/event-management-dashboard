@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import Close from "./common/close";
+import Close from "./common/Close";
 
 const EventModal = ({
   isOpen,

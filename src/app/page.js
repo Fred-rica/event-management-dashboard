@@ -6,8 +6,6 @@ import SummaryCards from "@/components/SummaryCards";
 import { cardItems } from "@/hooks/carditems";
 import React, { Suspense, lazy } from "react";
 import { useSidebar } from "./context/sidebarContext";
-import Image from "next/image";
-import Close from "@/components/common/close";
 const EventBarChart = lazy(() => import("../components/EventBarChart")); 
 
 const Home = () => {
