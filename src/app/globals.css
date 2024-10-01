@@ -1,23 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: "#fff";
+ font-family: 'Inter', sans-serif;;
 }
 
 @layer utilities {
@@ -25,3 +24,22 @@ body {
     text-wrap: balance;
   }
 }
+
+
+/* Custom CSS to control the width of the slick elements */
+.slider-custom .slick-list {
+  width: 100% !important;
+  overflow: hidden;
+}
+
+.slider-custom .slick-track {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.slider-custom .slick-slide {
+  width: 100% !important;
+  flex: 1 0 auto; /* Ensure the slides take full width */
+}
+
+
