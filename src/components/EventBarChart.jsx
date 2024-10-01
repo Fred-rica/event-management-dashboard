@@ -37,6 +37,7 @@ const EventBarChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "bottom",
@@ -85,8 +86,8 @@ const EventBarChart = () => {
   };
 
   return (
-    <section className="w-1/2 border border-[#F2F2F7]">
-      <div className="w-full  h-full py-5 px-5 rounded-sm ">
+    <section className="w-full lg:w-1/2 border border-[#F2F2F7]">
+      <div className="w-full h-[400px] lg:h-full p-0 lg:p-5 rounded-sm">
         <Bar data={data} options={options} />
       </div>
     </section>

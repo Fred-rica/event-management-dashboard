@@ -6,6 +6,8 @@ import SummaryCards from "@/components/SummaryCards";
 import { cardItems } from "@/hooks/carditems";
 import React, { Suspense, lazy } from "react";
 import { useSidebar } from "./context/sidebarContext";
+import Image from "next/image";
+import Close from "@/components/common/close";
 const EventBarChart = lazy(() => import("../components/EventBarChart")); 
 
 const Home = () => {
@@ -13,14 +15,16 @@ const Home = () => {
   
   return (
     <section
-      className={`${
-        isCollapsed ? "xl:ml-[40px] lg:ml-[40px]" : "xl:ml-[210px] lg:ml-[210px]"
+      className={` ${
+        isCollapsed
+          ? "xl:ml-[40px] lg:ml-[40px]"
+          : "xl:ml-[210px] lg:ml-[210px]"
       }`}
     >
-      <p className="font-normal text-[1.375rem] leading[1.25rem] text-black mb-6">
+      <p className="font-normal text-[1.063rem] lg:text-[1.375rem] leading[1.25rem] text-black mb-6">
         Welcome! here’s your summary
       </p>
-      <section className="flex gap-3 mb-6">
+      <section className="flex flex-col lg:flex-row gap-3 mb-6">
         {cardItems.map((card, index) => (
           <SummaryCards
             key={index}
@@ -32,10 +36,10 @@ const Home = () => {
           />
         ))}
       </section>
-      <p className="font-medium text-lg text-black mb-4">
+      <p className="font-medium text-[1.063rem] leading-[0.75rem] lg:text-lg text-black mb-4">
         Event Registrations per month
       </p>
-      <section className="flex w-full h-[320px] gap-4 mb-6">
+      <section className="flex flex-col lg:flex-row  w-full lg:h-[320px] gap-4 lg:mb-6">
         <Suspense fallback={<div>Loading...</div>}>
           <EventBarChart />
         </Suspense>

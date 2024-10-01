@@ -14,7 +14,7 @@ const SummaryCards = ({
    const percentageChangeColor =
      change === "positive" ? "text-green" : "text-red";
   return (
-    <section className="w-72 rounded-sm border border-[#F2F2F7] bg-white p-4">
+    <section className="w-full lg:w-72 rounded-sm border border-[#F2F2F7] bg-white p-4">
       <div className="flex gap-1 items-center">
         <p className="font-semibold text-base text-gray">{title}</p>
         <Image

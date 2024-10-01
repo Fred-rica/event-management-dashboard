@@ -14,9 +14,9 @@ const SideBar = () => {
   
   const { isCollapsed, toggleCollapse } = useSidebar();
   return (
-    <nav
+    <aside
       className={cn(
-        "flex flex-col gap-y-4 h-full border-r border-[#F1F5F9] pt-6  ",
+        "hidden lg:flex lg:flex-col gap-y-4 h-full border-r border-[#F1F5F9] pt-6 fixed z-10 left-0 h-[calc(100vh-100px)]",
         {
           "w-16": isCollapsed, // Narrower width when collapsed
           "w-[15rem]": !isCollapsed, // Wider width when not collapsed
@@ -98,7 +98,7 @@ const SideBar = () => {
           </p>
         )}
       </button>
-    </nav>
+    </aside>
   );
 };
 

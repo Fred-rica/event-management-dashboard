@@ -72,7 +72,7 @@ const Pagination = ({
 
       {/* Rows Per Page */}
       <div>
-        <span>Show: </span>
+        <span className="hidden lg:inline-block pr-0 lg:pr-3 ">Show: </span>
         <select
           className="border p-2 border-[#E2E8F0] rounded"
           value={rowsPerPage}

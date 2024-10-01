@@ -6,6 +6,7 @@ import Image from "next/image";
 import FilterButton from "./common/FilterButtons";
 import Pagination from "./common/Pagination";
 import EventModal from "./EventModal";
+import EventsTable from "./EventsTable";
 
 const EventTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,9 +69,9 @@ const EventTable = () => {
     <section className="py-6">
       <p className="font-medium text-lg text-black ">Events History</p>
       {/* Section to Sort, Search and Filter */}
-      <section className="flex items-center justify-between gap-4 mb-4">
-        <section className="flex w-[60%] justify-between items-center">
-          <div className="relative w-[28%]">
+      <section className="flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center lg:justify-between gap-4 mb-4">
+        <section className="flex  flex-col lg:flex-row w-full lg:w-[60%] lg:justify-between lg:items-center gap-2 lg:gap-0">
+          <div className="relative w-full lg:w-[28%]">
             <input
               type="text"
               placeholder="Search..."
@@ -107,11 +108,11 @@ const EventTable = () => {
             Displaying {rowsPerPage} results
           </p>
         </section>
-        <section className="flex w-[33%] gap-4  items-center">
-          <div className="flex gap-4 items-center">
+        <section className="flex flex-col lg:flex-row w-full lg:w-[33%] gap-4  lg:items-center">
+          <div className="flex justify-between gap-0 lg:gap-4 items-center">
             <p className="text-lightModePrimaryText normal text-sm">Sort:</p>
             <select
-              className=" flex  items-center px-4 py-2 rounded border-[#E2E8F0] border text-lightModePrimaryText font-normal text-sm"
+              className=" flex  cursor-pointer items-center px-4 py-2 rounded border-[#E2E8F0] border text-lightModePrimaryText font-normal text-sm"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
             >
@@ -126,70 +127,33 @@ const EventTable = () => {
               </option>
             </select>
           </div>
-          <div className="flex  items-center px-3 py-2 rounded border border-[#E2E8F0] text-lightModePrimaryText font-normal">
-            <Image
-              src="/assets/Images/icons/elipsis.svg"
-              alt="elipsis"
-              height={20}
-              width={20}
-            />
-          </div>
-          <div className="flex  items-center px-4 py-2 gap-4 rounded border border-[#E2E8F0] text-lightModePrimaryText font-normal text-sm">
-            <Image
-              src="/assets/Images/icons/download.svg"
-              alt="download"
-              height={16}
-              width={16}
-            />
-            <p className="text-lightModePrimaryText">Export</p>
+          <div className="flex justify-between gap-0 lg:gap-4 items-center">
+            <div className="flex  cursor-pointer items-center px-3 py-2 rounded border border-[#E2E8F0] text-lightModePrimaryText font-normal">
+              <Image
+                src="/assets/Images/icons/elipsis.svg"
+                alt="elipsis"
+                height={20}
+                width={20}
+              />
+            </div>
+            <div className="flex  cursor-pointer items-center px-4 py-2 gap-4 rounded border border-[#E2E8F0] text-lightModePrimaryText font-normal text-sm">
+              <Image
+                src="/assets/Images/icons/download.svg"
+                alt="download"
+                height={16}
+                width={16}
+              />
+              <p className="text-lightModePrimaryText">Export</p>
+            </div>
           </div>
         </section>
       </section>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse ">
-          <thead>
-            <tr className="bg-[#F1F5F9] text-gray font-semibold text-xs ">
-              <th className=" p-4 text-start">Event Name</th>
-              <th className=" p-4 py-2 text-start">Date</th>
-              <th className=" p-4 text-start">Speaker</th>
-              <th className="p-4 text-start">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedData.map((event, index) => (
-              <tr
-                key={index}
-                className="hover:bg-[#F1F5F9] cursor-pointer text-lightModePrimaryText font-normal text-sm"
-                onClick={() => handleRowClick(event)}
-              >
-                <td className=" p-4">{event.eventName}</td>
-                <td className=" p-4 ">{event.date}</td>
-                <td className="p-4 ">{event.speaker}</td>
-                <td className="">
-                  <div
-                    className={`px-2 py-1 rounded-full flex gap-2 items-center w-[60%] ${
-                      event.status === "Completed"
-                        ? "bg-[#D1FAE5] text-green"
-                        : "bg-[#DBEAFE] text-[#3B82F6]"
-                    }`}
-                  >
-                    <div
-                      className={`w-1.5 h-1.5 rounded-full ${
-                        event.status === "Completed"
-                          ? "bg-green"
-                          : "bg-[#3B82F6]"
-                      }`}
-                    ></div>
-                    <p className="">{event.status}</p>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <EventsTable
+        paginatedData={paginatedData}
+        handleRowClick={handleRowClick}
+      />
 
       {/* Pagination */}
       <Pagination
@@ -199,6 +163,7 @@ const EventTable = () => {
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
       />
+      {/* Modal */}
       <EventModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}

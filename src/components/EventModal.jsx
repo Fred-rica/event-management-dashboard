@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
+import Close from "./common/close";
 
 const EventModal = ({
   isOpen,
@@ -15,15 +16,10 @@ const EventModal = ({
 
   return (
     <section className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg w-[440px] relative">
+      <div className="bg-white rounded-lg w-[335px] lg:w-[440px] relative">
         <section className=" p-7">
           {/* Close Button */}
-          <button
-            className="absolute top-4 right-4 text-lightModePrimaryText border border-[#E2E8F0] p-2 rounded-full h-7 w-7 flex items-center justify-center"
-            onClick={onClose}
-          >
-            &times;
-          </button>
+          <Close onClose={onClose} />
 
           {/* Event Details */}
           <h2 className="text-lg font-semibold text-lightModePrimaryText">
@@ -48,14 +44,14 @@ const EventModal = ({
           </p>
         </section>
         {/* Action Buttons */}
-        <div className="mt-6 flex justify-between bg-[#F8FAFC] p-6 gap-4">
+        <div className="mt-6 flex flex-col lg:flex-row lg:justify-between bg-[#F8FAFC] p-6 gap-4">
           <button
             className="bg-white font-normal text-sm px-4 py-2 rounded-sm border text-lightModePrimaryText border-[#E2E8F0]"
             onClick={onEdit}
           >
             Edit
           </button>
-          <section className="flex justify-between gap-2">
+          <section className="flex flex flex-col lg:flex-row lg:justify-between gap-2">
             <button
               className="bg-red font-normal text-sm px-4 py-2 rounded-sm text-white"
               onClick={onDelete}

@@ -54,10 +54,10 @@ function EventSlider() {
   };
 
   return (
-    <section className="w-1/2 rounded-sm overflow-hidden mx-auto">
+    <section className="w-full lg:w-1/2 rounded-sm overflow-hidden mx-auto">
       <div className="relative w-full h-full overflow-hidden">
         <Slider {...settings}>
-          <div className="slide-item relative w-full h-[320px]">
+          <div className="slide-item relative w-full h-[350px]">
             {/* Dark overlay  to make text pop on image*/}
             <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
 
@@ -92,7 +92,7 @@ function EventSlider() {
               objectFit="cover"
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-20  text-white z-20 w-full px-6">
+            <div className="absolute bottom-10  text-white z-20 w-full px-6">
               <p className="text-xs font-semibold mb-4">
                 Latest News & Updates
               </p>
@@ -115,7 +115,7 @@ function EventSlider() {
               objectFit="cover"
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-20  text-white z-20 w-full px-6">
+            <div className="absolute bottom-10  text-white z-20 w-full px-6">
               <p className="text-xs font-semibold mb-4">
                 Latest News & Updates
               </p>
