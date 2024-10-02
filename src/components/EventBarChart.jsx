@@ -11,19 +11,20 @@ import {
   Legend,
 } from "chart.js";
 import { eventData } from "@/hooks/eventChartData";
+import { useAppContext } from "@/app/context/AppContext";
 
-// Register the components needed for Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const EventBarChart = () => {
-  const [labels, setLabels] = useState([]); // State for labels
+  const [labels, setLabels] = useState([]);
+  const { theme } = useAppContext();
 
   // Function to determine if the screen is small
   const isSmallScreen = () => window.innerWidth < 600;
@@ -32,22 +33,18 @@ const EventBarChart = () => {
   const getLabels = () => {
     const monthNames = Object.keys(eventData);
     return isSmallScreen()
-      ? monthNames.map((month) => month.slice(0, 2)) // First two letters for small screens
-      : monthNames; // Full names for larger screens
+      ? monthNames.map((month) => month.slice(0, 2))
+      : monthNames;
   };
 
   useEffect(() => {
-    // Set initial labels
     setLabels(getLabels());
-
     // Update labels on resize
     const handleResize = () => {
       setLabels(getLabels());
     };
 
     window.addEventListener("resize", handleResize);
-
-    // Cleanup event listener on unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -79,35 +76,36 @@ const EventBarChart = () => {
         ticks: {
           stepSize: 200,
           padding: 15,
+          color: theme === "light" ? "#64748B" : "white", // Conditional color based on theme
         },
         grid: {
           drawBorder: false,
           drawOnChartArea: true,
           drawTicks: false,
-          color: "rgba(200, 200, 200, 0.5)",
+          color: theme === "light" ? "#e2e7f1" : "#64748B",
+          left: false,
           lineWidth: 1.5,
         },
         border: {
           dash: [6, 2],
-          color: "rgba(200, 200, 200, 0.5)",
         },
       },
       x: {
         ticks: {
           padding: 15,
+          color: theme === "light" ? "#64748B" : "white",
         },
         grid: {
           display: true,
           drawOnChartArea: true,
           drawBorder: false,
           drawTicks: false,
-          color: "rgba(200, 200, 200, 0.5)",
+          color: theme === "light" ? "#e2e7f1" : "#64748B",
           lineWidth: 1.5,
           width: 0,
         },
         border: {
           dash: [6, 2],
-          color: "rgba(200, 200, 200, 0.5)",
           width: 0,
         },
       },
@@ -115,7 +113,7 @@ const EventBarChart = () => {
   };
 
   return (
-    <section className="w-full lg:w-1/2 border border-[#F2F2F7]">
+    <section className="w-full lg:w-1/2 border border-[#F2F2F7] dark:border-primaryDark bg-inherit dark:bg-primaryDark ">
       <div className="w-full h-[260px] lg:h-full p-0 lg:p-5 rounded-sm">
         <Bar data={data} options={options} />
       </div>

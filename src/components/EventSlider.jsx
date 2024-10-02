@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 
-
 // Custom arrow components
 function NextArrow({ onClick }) {
   return (
@@ -47,7 +46,7 @@ function EventSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000, 
+    autoplaySpeed: 5000,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     className: "slider-custom h-full",
@@ -59,7 +58,7 @@ function EventSlider() {
         <Slider {...settings}>
           <div className="slide-item relative w-full h-[350px]">
             {/* Dark overlay  to make text pop on image*/}
-            <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black z-10"></div>
 
             <Image
               src="/assets/Images/temp/slide1.svg"
@@ -68,7 +67,7 @@ function EventSlider() {
               objectFit="cover"
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-10  text-white z-20 w-full px-6">
+            <div className="absolute bottom-16  text-white z-20 w-full px-6">
               <p className="text-xs font-semibold mb-4">
                 Latest News & Updates
               </p>
@@ -83,7 +82,7 @@ function EventSlider() {
 
           <div className="slide-item relative w-full h-[350px]">
             {/* Dark overlay  to make text pop on image*/}
-            <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black z-10"></div>
 
             <Image
               src="/assets/Images/temp/slide2.svg"
@@ -92,7 +91,7 @@ function EventSlider() {
               objectFit="cover"
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-10  text-white z-20 w-full px-6">
+            <div className="absolute bottom-16   text-white z-20 w-full px-6">
               <p className="text-xs font-semibold mb-4">
                 Latest News & Updates
               </p>
@@ -106,7 +105,7 @@ function EventSlider() {
           </div>
           <div className="slide-item relative w-full h-[350px]">
             {/* Dark overlay  to make text pop on image*/}
-            <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black z-10"></div>
 
             <Image
               src="/assets/Images/temp/slide3.svg"
@@ -115,7 +114,7 @@ function EventSlider() {
               objectFit="cover"
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-10  text-white z-20 w-full px-6">
+            <div className="absolute bottom-16   text-white z-20 w-full px-6">
               <p className="text-xs font-semibold mb-4">
                 Latest News & Updates
               </p>

@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import React from 'react'
-import SideBar from './SideBar'
-import MobileNavBar from './MobileNavBar'
+import React from "react";
+import SideBar from "./SideBar";
+import MobileNavBar from "./MobileNavBar";
 
 const NavBar = () => {
   return (
@@ -13,6 +13,6 @@ const NavBar = () => {
       <MobileNavBar />
     </nav>
   );
-}
+};
 
-export default NavBar
+export default NavBar;

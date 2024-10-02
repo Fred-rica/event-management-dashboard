@@ -1,21 +1,23 @@
-'use client'
+"use client";
 
-import Image from 'next/image';
-import React, { useState } from 'react'
+import ArrowDownIcon from "@/app/icons/ArrowDown";
+import NextArrow from "@/app/icons/NextArrow";
+import Image from "next/image";
+import React, { useState } from "react";
 
 const EventsTable = ({ paginatedData, handleRowClick }) => {
-   const [expandedRow, setExpandedRow] = useState(null);
+  const [expandedRow, setExpandedRow] = useState(null);
 
-   // Function to handle toggling the expanded state of rows
-   const handleToggleExpand = (index) => {
-     setExpandedRow(expandedRow === index ? null : index); // If clicked again, collapse the row
-   };
-  
+  // Function to handle toggling the expanded state of rows on small screens
+  const handleToggleExpand = (index) => {
+    setExpandedRow(expandedRow === index ? null : index);
+  };
+
   return (
     <div className="overflow-x-auto">
       <table className="table-auto w-full border-collapse ">
         <thead>
-          <tr className="bg-[#F1F5F9] text-gray font-semibold text-xs">
+          <tr className="bg-[#F1F5F9] dark:bg-[#6A6676] dark:text-white text-gray font-semibold text-xs">
             <th className="p-4 text-start ">Event Name</th>
             <th className="p-4 py-2 text-start hidden lg:table-cell ">Date</th>
             <th className="p-4 text-start hidden lg:table-cell">Speaker</th>
@@ -28,8 +30,8 @@ const EventsTable = ({ paginatedData, handleRowClick }) => {
             <React.Fragment key={index}>
               <tr
                 key={index}
-                className={`hover:bg-[#F1F5F9] cursor-pointer text-lightModePrimaryText font-normal text-sm ${
-                  expandedRow === index ? "bg-[#F1F5F9]" : " "
+                className={`hover:bg-[#F1F5F9] dark:hover:bg-[#6A6676] dark:bg-primaryDark cursor-pointer text-lightModePrimaryText dark:text-lightPurple font-normal text-sm ${
+                  expandedRow === index ? "bg-[#F1F5F9] dark:bg-[#514E5D]" : " "
                 }`}
                 onClick={() => handleRowClick(event)}
               >
@@ -43,18 +45,18 @@ const EventsTable = ({ paginatedData, handleRowClick }) => {
                     }}
                   >
                     {expandedRow === index ? (
-                      <Image
-                        src="/assets/Images/icons/arrowDown.svg"
-                        alt="downarrow"
+                      <ArrowDownIcon
+                        className="dark:stroke-[#FCF7FF] stroke-[#334155]"
                         height={20}
                         width={20}
                       />
                     ) : (
-                      <Image
-                        src="/assets/Images/icons/nextArrow.svg"
-                        alt="next arrow"
-                        height={20}
+                      <NextArrow
                         width={20}
+                        height={20}
+                        className={
+                          "dark:stroke-lightPurple stroke-[#334155] dark:hover:stroke-[#334155]"
+                        }
                       />
                     )}
                   </button>
@@ -64,26 +66,26 @@ const EventsTable = ({ paginatedData, handleRowClick }) => {
                 <td className="p-4 hidden lg:table-cell ">{event.speaker}</td>
                 <td className="">
                   <div
-                    className={`px-2 py-1 rounded-full flex gap-2 items-center w-full  lg:w-[60%] ${
+                    className={`py-1 px-3 rounded-full inline-flex gap-2 items-center border  ${
                       event.status === "Completed"
-                        ? "bg-[#D1FAE5] text-green"
-                        : "bg-[#DBEAFE] text-[#3B82F6]"
+                        ? "bg-green text-white border-green lg:bg-[#D1FAE5] dark:lg:bg-inherit dark:lg:text-[#65DDB5] lg:text-green"
+                        : " bg-[#3B82F6] border-[#3B82F6] lg:border-[#77B1FF] text-white lg:bg-[#DBEAFE] dark:lg:bg-inherit lg:text-[#3B82F6] dark:lg:text-[#77B1FF]"
                     }`}
                   >
                     <div
-                      className={`w-1.5 h-1.5 rounded-full ${
+                      className={`hidden lg:block w-1.5 h-1.5 rounded-full ${
                         event.status === "Completed"
-                          ? "bg-green"
-                          : "bg-[#3B82F6]"
+                          ? "bg-green dark:bg-[#65DDB5]"
+                          : "bg-[#3B82F6] dark:bg-[#77B1FF]"
                       }`}
                     ></div>
-                    <p className="">{event.status}</p>
+                    {event.status}
                   </div>
                 </td>
               </tr>
-              {/* Expanded row for additional details (only shown when the arrow is clicked) */}
+              {/* Expanded row for additional details (only shown when the arrow is clicked on small screen) */}
               {expandedRow === index && (
-                <tr className="bg-[#FCF7FF] text-lightModePrimaryText font-normal text-sm">
+                <tr className="bg-lightPurple dark:bg-[#ADA9BB] dark:text-lightPurple text-lightModePrimaryText font-normal text-sm">
                   <td className="p-4" colSpan="3">
                     <div className="flex items-center justify-between">
                       <p>{event.speaker}</p>
@@ -100,4 +102,4 @@ const EventsTable = ({ paginatedData, handleRowClick }) => {
   );
 };
 
-export default EventsTable
+export default EventsTable;

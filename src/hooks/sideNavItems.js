@@ -1,50 +1,56 @@
-import React from 'react'
+import CalendarIcon from "@/app/icons/CalendarIcon";
+import HomeIcon from "@/app/icons/HomeIcon";
+import MessagesIcon from "@/app/icons/MessagesIcon";
+import NotificationsIcon from "@/app/icons/NotificationsIcon";
+import ReportsIcon from "@/app/icons/ReportsIcon";
+import SettingsIcon from "@/app/icons/SettingsIcon";
+import SpeakersIcon from "@/app/icons/SpeakersIcon";
+import React from "react";
 
 const useSideNavItems = () => {
   const sideNavItems = [
     {
       Title: "Home",
-      Icon: "/assets/Images/icons/home.svg",
+      Icon: <HomeIcon />,
       alt: "home image",
       link: "/",
     },
     {
       Title: "Events",
-      Icon: "/assets/Images/icons/calendar.svg",
+      Icon: <CalendarIcon />,
       alt: "calendar image",
       link: "/events",
     },
     {
       Title: "Speakers",
-      Icon: "/assets/Images/icons/speakers.svg",
+      Icon: <SpeakersIcon />,
       alt: "speakers image",
       link: "/speakers",
     },
     {
       Title: "Reports",
-      Icon: "/assets/Images/icons/reports.svg",
+      Icon: <ReportsIcon />,
       alt: "reports image",
       link: "/reports",
     },
     {
       Title: "Notifications",
-      Icon: "/assets/Images/icons/notifications.svg",
+      Icon: <NotificationsIcon />,
       alt: "notifications image",
       link: "/notifications",
     },
     {
       Title: "messages",
-      Icon: "/assets/Images/icons/messages.svg",
+      Icon: <MessagesIcon />,
       alt: "messages image",
       link: "/messages",
     },
     {
       Title: "settings",
-      Icon: "/assets/Images/icons/settings.svg",
+      Icon: <SettingsIcon />,
       alt: "settings image",
       link: "/settings",
     },
-   
   ];
   return sideNavItems;
 };

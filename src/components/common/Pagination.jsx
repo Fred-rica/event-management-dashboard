@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import Image from "next/image";
+import NextArrow from "@/app/icons/NextArrow";
+import PreviousArrow from "@/app/icons/previousArrow";
 import React from "react";
-import { useState } from "react";
 
 const Pagination = ({
   currentPage,
@@ -17,7 +17,6 @@ const Pagination = ({
     }
   };
 
- 
   // Calculate the range of page numbers to display
   const pageNumbers = [];
   const maxPagesToShow = 3; // Number of page numbers to display at a time
@@ -31,15 +30,16 @@ const Pagination = ({
     <div className="flex items-center justify-between mt-4">
       <div className="flex items-center">
         <button
-          className="p-2 border border-[#E2E8F0] rounded cursor-pointer hover:bg-[#E2E8F0]"
+          className="p-2 border border-[#E2E8F0] rounded cursor-pointer hover:bg-[#E2E8F0] dark:hover:bg-[#E2E8F0] dark:bg-primaryDark dark:border-primaryDark"
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
-          <Image
-            src="/assets/Images/icons/previousArrow.svg"
-            alt="previous arrow"
-            height={20}
-            width={20}
+          <PreviousArrow
+            width={16}
+            height={16}
+            className={
+              "dark:stroke-lightPurple stroke-[#334155] dark:hover:stroke-[#334155]"
+            }
           />
         </button>
 
@@ -47,8 +47,10 @@ const Pagination = ({
         {pageNumbers.map((page) => (
           <button
             key={page}
-            className={`px-4 py-2 rounded-full mx-1 ${
-              currentPage === page ? "bg-primary text-white" : ""
+            className={`w-6 h-6 rounded-full mx-1 dark:text-white ${
+              currentPage === page
+                ? "bg-primary text-sm text-white dark:text-white"
+                : ""
             }`}
             onClick={() => handlePageChange(page)}
           >
@@ -57,24 +59,27 @@ const Pagination = ({
         ))}
 
         <button
-          className=" p-2 border border-[#E2E8F0] rounded cursor-pointer hover:bg-[#E2E8F0]"
+          className=" p-2 border border-[#E2E8F0] rounded cursor-pointer hover:bg-[#E2E8F0] dark:hover:bg-[#E2E8F0] dark:bg-primaryDark dark:border-primaryDark"
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
-          <Image
-            src="/assets/Images/icons/nextArrow.svg"
-            alt="next arrow"
-            height={20}
-            width={20}
+          <NextArrow
+            width={16}
+            height={16}
+            className={
+              "dark:stroke-lightPurple stroke-[#334155] dark:hover:stroke-[#334155]"
+            }
           />
         </button>
       </div>
 
       {/* Rows Per Page */}
       <div>
-        <span className="hidden lg:inline-block pr-0 lg:pr-3 ">Show: </span>
+        <span className="hidden lg:inline-block pr-0 lg:pr-3 dark:text-white text-lightModePrimaryText">
+          Show:{" "}
+        </span>
         <select
-          className="border p-2 border-[#E2E8F0] rounded"
+          className="border p-2 border-[#E2E8F0] dark:text-white text-lightModePrimaryText dark:bg-primaryDark dark:border-primaryDark rounded outline-none"
           value={rowsPerPage}
           onChange={(e) => setRowsPerPage(parseInt(e.target.value))}
         >

@@ -1,26 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import useSideNavItems from "@/hooks/sideNavItems";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/utils/styleUtlies";
-import { useSidebar } from "@/app/context/sidebarContext";
+import ThemeSwitch from "../ThemeSwitch";
+import { useAppContext } from "@/app/context/AppContext";
 
 const SideBar = () => {
   const pathname = usePathname();
   const sideNavItems = useSideNavItems();
-  
-  const { isCollapsed, toggleCollapse } = useSidebar();
+
+  const { isCollapsed, toggleCollapse } = useAppContext();
+
   return (
     <aside
       className={cn(
-        "hidden lg:flex lg:flex-col gap-y-4 h-full border-r border-[#F1F5F9] pt-6 fixed z-10 left-0 h-[calc(100vh-100px)]",
+        "hidden lg:flex lg:flex-col gap-y-4 h-full border-r border-[#F1F5F9] dark:border-primaryDark pt-6 fixed z-10 left-0 h-[calc(100vh-100px)] dark:bg-primaryDark",
         {
-          "w-16": isCollapsed, // Narrower width when collapsed
-          "w-[15rem]": !isCollapsed, // Wider width when not collapsed
-        }
+          "w-16": isCollapsed,
+          "w-[15rem]": !isCollapsed,
+        },
       )}
     >
       {!isCollapsed && (
@@ -52,23 +54,31 @@ const SideBar = () => {
             className={cn(
               "flex mx-2 items-center rounded-sm capitalize cursor-pointer",
               {
-                "bg-[#FCF7FF]": isActive,
-                "hover:bg-[#FCF7FF]": !isActive,
-              }
+                "bg-lightPurple dark:bg-primary": isActive,
+                "hover:bg-lightPurple hover:dark:bg-primary": !isActive,
+              },
             )}
           >
             <button
               className={cn(
                 "flex items-center gap-4 p-2  justify-start w-full bg-inherit",
                 {
-                  "text-primary": isActive,
-                  "text-lightModePrimaryText": !isActive,
-                  "hover:text-primary": !isActive,
-                }
+                  "text-primary dark:text-lightPurple": isActive,
+                  "text-lightModePrimaryText dark:text-white": !isActive,
+                  "hover:text-primary hover:dark:text-lightPurple": !isActive,
+                },
               )}
             >
-              <Image src={items.Icon} alt={items.alt} width={20} height={20} />
-              {/* Conditionally render the title text based on collapsed state */}
+              {React.cloneElement(items.Icon, {
+                width: 20,
+                height: 20,
+                className: {
+                  "stroke-primary dark:stroke-lightPurple": isActive,
+                  "stroke-[#ADA9BB] hover:stroke-primary dark:hover:stroke-lightPurple":
+                    !isActive,
+                },
+              })}
+              {/* Conditionally render the title text based on sideBar collapsed state */}
               {!isCollapsed && (
                 <p className="font-normal text-sm capitalize">{items.Title}</p>
               )}
@@ -91,13 +101,20 @@ const SideBar = () => {
           width={20}
           height={20}
         />
-        {/* Hide the text if sidebar is collapsed */}
         {!isCollapsed && (
-          <p className="font-normal text-sm capitalize text-lightModePrimaryText hover:text-primary cursor-pointer">
+          <p className="font-normal text-sm capitalize text-lightModePrimaryText dark:text-white hover:text-primary hover:dark:text-lightPurple cursor-pointer">
             collapse
           </p>
         )}
       </button>
+      <div className="flex items-center gap-4 p-2 justify-start mx-2">
+        <ThemeSwitch />
+        {!isCollapsed && (
+          <p className="font-normal text-sm capitalize text-lightModePrimaryText dark:text-white hover:text-primary hover:dark:text-lightPurple cursor-pointer">
+            Dark Mode
+          </p>
+        )}
+      </div>
     </aside>
   );
 };

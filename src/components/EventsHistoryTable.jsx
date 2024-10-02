@@ -1,12 +1,13 @@
-
-'use client'
+"use client";
 import { useState } from "react";
 import { tableData } from "@/hooks/tableData";
-import Image from "next/image";
 import FilterButton from "./common/FilterButtons";
 import Pagination from "./common/Pagination";
 import EventModal from "./EventModal";
 import EventsTable from "./EventsTable";
+import Elipsis from "@/app/icons/ElipsisIcon";
+import DownloadIcon from "@/app/icons/DownloadIcon";
+import SearchIcon from "@/app/icons/SearchIcon";
 
 const EventTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,17 +30,14 @@ const EventTable = () => {
 
   const handleEditEvent = () => {
     console.log("Edit event:", selectedEvent);
-    // Implement edit logic here
   };
 
   const handleDeleteEvent = () => {
     console.log("Delete event:", selectedEvent);
-    // Implement delete logic here
   };
 
   const handleCompleteEvent = () => {
     console.log("Mark event as completed:", selectedEvent);
-    // Implement mark as completed logic here
   };
   const filteredData = tableData
     .filter((event) => {
@@ -57,17 +55,19 @@ const EventTable = () => {
     .sort((a, b) =>
       sortBy === "Most Recent"
         ? new Date(b.date) - new Date(a.date)
-        : new Date(a.date) - new Date(b.date)
+        : new Date(a.date) - new Date(b.date),
     );
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
   const paginatedData = filteredData.slice(
     (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
+    currentPage * rowsPerPage,
   );
 
   return (
     <section className="py-6">
-      <p className="font-medium text-lg text-black ">Events History</p>
+      <p className="font-medium text-lg text-black dark:text-white">
+        Events History
+      </p>
       {/* Section to Sort, Search and Filter */}
       <section className="flex flex-col lg:flex-row mt-3 lg:mt-0 lg:items-center lg:justify-between gap-4 mb-4">
         <section className="flex  flex-col lg:flex-row w-full lg:w-[60%] lg:justify-between lg:items-center gap-2 lg:gap-0">
@@ -75,16 +75,15 @@ const EventTable = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="border border-[#E2E8F0] p-2 rounded w-full pl-10"
+              className="border border-[#E2E8F0] p-2 rounded w-full pl-10 dark:bg-primaryDark dark:border-primaryDark placeholder-[#CBD5E1] font-normal text-sm outline-none dark:text-[#CBD5E1]"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-              <Image
-                src="/assets/Images/icons/search.svg"
-                alt="search"
+              <SearchIcon
                 width={20}
                 height={20}
+                className={"dark:stroke-[#94A3B8] stroke-[#94A3B8]"}
               />
             </div>
           </div>
@@ -104,23 +103,28 @@ const EventTable = () => {
             onClick={() => setFilterBy("eventName")}
           />
 
-          <p className="text-lightModePrimaryText text-sm font-semibold">
+          <p className="text-lightModePrimaryText dark:text-white text-sm font-semibold">
             Displaying {rowsPerPage} results
           </p>
         </section>
         <section className="flex flex-col lg:flex-row w-full lg:w-[33%] gap-4  lg:items-center">
           <div className="flex justify-between gap-0 lg:gap-4 items-center">
-            <p className="text-lightModePrimaryText normal text-sm">Sort:</p>
+            <p className="text-lightModePrimaryText dark:text-[#FCF7FF] normal text-sm">
+              Sort:
+            </p>
             <select
-              className=" flex  cursor-pointer items-center px-4 py-2 rounded border-[#E2E8F0] border text-lightModePrimaryText font-normal text-sm"
+              className="outline-none flex  dark:bg-primaryDark dark:border-primaryDark cursor-pointer items-center px-4 py-2 rounded border-[#E2E8F0] border text-lightModePrimaryText dark:text-[#FCF7FF] font-normal text-sm"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
             >
-              <option className="text-lightModePrimaryText" value="Most Recent">
+              <option
+                className="text-lightModePrimaryText dark:text-[#FCF7FF]"
+                value="Most Recent"
+              >
                 Most Recent
               </option>
               <option
-                className="text-lightModePrimaryText"
+                className="text-lightModePrimaryText dark:text-[#FCF7FF]"
                 value="Oldest First"
               >
                 Oldest First
@@ -128,22 +132,23 @@ const EventTable = () => {
             </select>
           </div>
           <div className="flex justify-between gap-0 lg:gap-4 items-center">
-            <div className="flex  cursor-pointer items-center px-3 py-2 rounded border border-[#E2E8F0] text-lightModePrimaryText font-normal">
-              <Image
-                src="/assets/Images/icons/elipsis.svg"
-                alt="elipsis"
+            <div className="flex  cursor-pointer items-center px-3 py-2 rounded border border-[#E2E8F0] text-lightModePrimaryText dark:text-[#FCF7FF] dark:bg-primaryDark dark:border-primaryDark font-normal">
+              <Elipsis
+                className="dark:stroke-[#FCF7FF] stroke-[#334155]"
                 height={20}
                 width={20}
               />
             </div>
-            <div className="flex  cursor-pointer items-center px-4 py-2 gap-4 rounded border border-[#E2E8F0] text-lightModePrimaryText font-normal text-sm">
-              <Image
-                src="/assets/Images/icons/download.svg"
-                alt="download"
+
+            <div className="flex  cursor-pointer items-center px-4 py-2 gap-4 rounded border border-[#E2E8F0] text-lightModePrimaryText dark:text-[#FCF7FF] font-normal text-sm dark:bg-primaryDark dark:border-primaryDark">
+              <DownloadIcon
+                className="dark:stroke-[#FCF7FF] stroke-[#334155]"
                 height={16}
                 width={16}
               />
-              <p className="text-lightModePrimaryText">Export</p>
+              <p className="text-lightModePrimaryText dark:text-[#FCF7FF] ">
+                Export
+              </p>
             </div>
           </div>
         </section>

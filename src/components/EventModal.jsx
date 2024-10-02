@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import React from "react";
@@ -16,17 +16,19 @@ const EventModal = ({
 
   return (
     <section className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg w-[335px] lg:w-[440px] relative">
+      <div className="bg-white dark:bg-primaryDark rounded-lg w-[335px] lg:w-[440px] relative">
         <section className=" p-7">
           {/* Close Button */}
           <Close onClose={onClose} />
 
           {/* Event Details */}
-          <h2 className="text-lg font-semibold text-lightModePrimaryText">
+          <h2 className="text-lg font-semibold text-lightModePrimaryText dark:text-lightPurple">
             {eventData.eventName}
           </h2>
-          <p className="text-sm text-gray font-normal mb-8">{eventData.date}</p>
-          <p className="text-sm text-lightModePrimaryText font-normal mb-8">
+          <p className="text-sm text-gray font-normal dark:text-lightPurple mb-8">
+            {eventData.date}
+          </p>
+          <p className="text-sm text-lightModePrimaryText font-normal dark:text-lightPurple mb-8">
             {eventData.description}
           </p>
           <Image
@@ -36,15 +38,15 @@ const EventModal = ({
             width={40}
           />
 
-          <p className="text-lightModePrimaryText font-normal text-xs">
+          <p className="text-lightModePrimaryText dark:text-lightPurple font-normal text-xs">
             1 Guest Speaker: {eventData.speaker}{" "}
           </p>
-          <p className="text-lightModePrimaryText font-normal text-xs">
+          <p className="text-lightModePrimaryText dark:text-lightPurple font-normal text-xs">
             {eventData.attendees} Attendees
           </p>
         </section>
         {/* Action Buttons */}
-        <div className="mt-6 flex flex-col lg:flex-row lg:justify-between bg-[#F8FAFC] p-6 gap-4">
+        <div className="mt-6 flex flex-col lg:flex-row lg:justify-between bg-[#F8FAFC] dark:bg-[#ADA9BB] p-6 gap-4">
           <button
             className="bg-white font-normal text-sm px-4 py-2 rounded-sm border text-lightModePrimaryText border-[#E2E8F0]"
             onClick={onEdit}

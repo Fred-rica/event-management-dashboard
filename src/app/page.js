@@ -1,16 +1,15 @@
-
-'use client'
+"use client";
 import EventTable from "@/components/EventsHistoryTable";
 import EventSlider from "@/components/EventSlider";
 import SummaryCards from "@/components/SummaryCards";
 import { cardItems } from "@/hooks/carditems";
 import React, { Suspense, lazy } from "react";
-import { useSidebar } from "./context/sidebarContext";
-const EventBarChart = lazy(() => import("../components/EventBarChart")); 
+import { useAppContext } from "./context/AppContext";
+const EventBarChart = lazy(() => import("../components/EventBarChart"));
 
 const Home = () => {
-  const { isCollapsed } = useSidebar();
-  
+  const { isCollapsed } = useAppContext();
+
   return (
     <section
       className={` ${
@@ -19,7 +18,7 @@ const Home = () => {
           : "xl:ml-[210px] lg:ml-[210px]"
       }`}
     >
-      <p className="font-normal text-[1.063rem] lg:text-[1.375rem] leading[1.25rem] text-black mb-6">
+      <p className="font-normal text-[1.063rem] lg:text-[1.375rem] leading[1.25rem] text-black dark:text-white mb-6">
         Welcome! here’s your summary
       </p>
       <section className="flex flex-col lg:flex-row gap-3 mb-6">
@@ -34,7 +33,7 @@ const Home = () => {
           />
         ))}
       </section>
-      <p className="font-medium text-[1.063rem] leading-[0.75rem] lg:text-lg text-black mb-4">
+      <p className="font-medium text-[1.063rem] leading-[0.75rem] lg:text-lg text-black dark:text-white mb-4">
         Event Registrations per month
       </p>
       <section className="flex flex-col lg:flex-row  w-full lg:h-[320px] gap-4 lg:mb-6">
@@ -46,5 +45,5 @@ const Home = () => {
       <EventTable />
     </section>
   );
-}
+};
 export default Home;
