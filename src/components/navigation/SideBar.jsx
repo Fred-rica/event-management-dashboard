@@ -18,7 +18,7 @@ const SideBar = () => {
   return (
     <aside
       className={cn(
-        "hidden lg:flex lg:flex-col gap-y-4 h-full border-r border-[#F1F5F9] dark:border-primaryDark pt-6 fixed z-10 left-0 h-[calc(100vh-100px)] dark:bg-primaryDark",
+        "hidden lg:flex lg:flex-col gap-y-4 h-full border-r border-[#F1F5F9] dark:border-primaryDark pt-6 fixed z-10 left-0 dark:bg-primaryDark",
         {
           "w-16": isCollapsed,
           "w-[15rem]": !isCollapsed,
@@ -89,7 +89,7 @@ const SideBar = () => {
 
       <button
         onClick={toggleCollapse}
-        className="flex items-center gap-4 p-2 justify-start mx-2"
+        className="flex items-center gap-4 px-2  justify-start mx-2"
       >
         <Image
           src={
@@ -97,7 +97,7 @@ const SideBar = () => {
               ? "/assets/Images/icons/collapseright.svg"
               : "/assets/Images/icons/collapse.svg"
           }
-          alt="logo"
+          alt="collapse arrow"
           width={20}
           height={20}
         />
@@ -107,12 +107,30 @@ const SideBar = () => {
           </p>
         )}
       </button>
-      <div className="flex items-center gap-4 p-2 justify-start mx-2">
+      <div className="flex items-center gap-4 px-2  justify-start mx-2">
         <ThemeSwitch />
         {!isCollapsed && (
-          <p className="font-normal text-sm capitalize text-lightModePrimaryText dark:text-white hover:text-primary hover:dark:text-lightPurple cursor-pointer">
+          <p className="font-normal text-xs capitalize text-lightModePrimaryText dark:text-white hover:text-primary hover:dark:text-lightPurple cursor-pointer">
             Dark Mode
           </p>
+        )}
+      </div>
+      <div className="flex items-center gap-3 px-2 justify-start mx-2">
+        <Image
+          src="/assets/Images/icons/userProfileIcon.svg"
+          alt="user profile icon"
+          width={32}
+          height={32}
+        />
+        {!isCollapsed && (
+          <div>
+            <p className="font-normal text-xs capitalize text-lightModePrimaryText dark:text-white hover:text-primary hover:dark:text-lightPurple cursor-pointer">
+              Rudra Devi
+            </p>
+            <p className="font-normal text-xs capitalize text-lightModePrimaryText dark:text-white hover:text-primary hover:dark:text-lightPurple cursor-pointer">
+              rudra.devi@gmail.com
+            </p>
+          </div>
         )}
       </div>
     </aside>

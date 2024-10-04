@@ -111,6 +111,23 @@ const MobileNavBar = () => {
             Dark Mode
           </p>
         </div>
+        <div className="flex items-center gap-3 px-2 justify-start mx-2">
+          <Image
+            src="/assets/Images/icons/userProfileIcon.svg"
+            alt="user profile icon"
+            width={32}
+            height={32}
+          />
+
+          <div>
+            <p className="font-normal text-xs capitalize text-lightModePrimaryText dark:text-white hover:text-primary hover:dark:text-lightPurple cursor-pointer">
+              Rudra Devi
+            </p>
+            <p className="font-normal text-xs capitalize text-lightModePrimaryText dark:text-white hover:text-primary hover:dark:text-lightPurple cursor-pointer">
+              rudra.devi@gmail.com
+            </p>
+          </div>
+        </div>
       </aside>
     </section>
   );
